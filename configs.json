@@ -1,4 +1,4 @@
 {
-    "slack_bot_token": "",
-    "slack_signing_secret": ""
+    "slack_bot_token": "****",
+    "slack_signing_secret": "****"
 }
