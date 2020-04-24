@@ -5,7 +5,6 @@ from bs4 import BeautifulSoup
 
 base_url = "https://www.icc-cricket.com/rankings"
 
-print(os.environ)
 @RTMClient.run_on(event='message')
 def say_hello(**payload):
     data = payload['data']
@@ -25,5 +24,5 @@ def say_hello(**payload):
             assert e.response["error"]  # str like 'invalid_auth', 'channel_not_found'
             print(f"Got an error: {e.response['error']}")
 
-rtm_client = RTMClient(token=os.environ["SLACK_BOT_TOKEN"])
+rtm_client = RTMClient(token=(os.environ["CLASSIC_SLACK_BOT_TOKEN"][1:]))
 rtm_client.start()
