@@ -23,5 +23,4 @@ slack_events_adapter = SlackEventAdapter(slack_signing_secret, "/slack/events")
 # def error_handler(error):
 #     print("Error: " + str(error))
 
-
 slack_events_adapter.start(port=3000)
