@@ -44,3 +44,4 @@ if not $VIRTUAL_ENV_PROMPT:
     del $VIRTUAL_ENV_PROMPT
 
 aliases["pydoc"] = ["python", "-m", "pydoc"]
+
