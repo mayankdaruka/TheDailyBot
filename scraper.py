@@ -24,7 +24,7 @@ def cricketRankings(url):
     first_ranked_points = first_ranked_tds[3].text
     first_ranked_rating = first_ranked_tds[4].text.strip()
 
-    all_rankings.append(['1', first_ranked_country, first_ranked_matches, first_ranked_points, first_ranked_rating])
+    all_rankings.append(['Rank 1: ', first_ranked_country, "Matches: " + first_ranked_matches, "Points: " + first_ranked_points, "Rating: " + first_ranked_rating])
 
     rest_countries = soup.find_all('tr', class_ = "table-body")
     for country in rest_countries:
@@ -35,13 +35,11 @@ def cricketRankings(url):
         country_matches = country_tds[2].text
         country_points = country_tds[3].text
         country_rating = country_tds[4].text
-        info_array.append(country_ranking)
+        info_array.append("Rank " + country_ranking + ": ")
         info_array.append(country)
-        info_array.append(country_matches)
-        info_array.append(country_points)
-        info_array.append(country_rating)
+        info_array.append("Matches: " + country_matches)
+        info_array.append("Points: " + country_points)
+        info_array.append("Rating: " + country_rating)
         all_rankings.append(info_array)
-    print(all_rankings)
 
-
-cricketRankings(ICCurl)
+    return all_rankings
