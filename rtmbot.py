@@ -1,8 +1,7 @@
 import os
 from slack import RTMClient
 from slack.errors import SlackApiError
-
-base_url = "https://www.icc-cricket.com/rankings"
+from scraper import *
 
 @RTMClient.run_on(event='message')
 def say_hello(**payload):
