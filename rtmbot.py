@@ -3,36 +3,47 @@ from slack import RTMClient
 from slack.errors import SlackApiError
 from scraper import *
 
+REPLY = ""
+INTEXT = False
+
+def handleMensCricket(data):
+    global INTEXT
+    global REPLY
+    REPLY = ""
+    if 'test ranking' in data['text']:
+        INTEXT = True
+        rankings = cricketRankings("https://www.icc-cricket.com/rankings/mens/team-rankings/test")
+        REPLY = "Test Rankings: \n"
+    elif 'odi ranking' in data['text']:
+        INTEXT = True
+        rankings = cricketRankings("https://www.icc-cricket.com/rankings/mens/team-rankings/odi")
+        REPLY = "ODI Rankings: \n"
+    elif 't20 ranking' in data['text']:
+        INTEXT = True
+        rankings = cricketRankings("https://www.icc-cricket.com/rankings/mens/team-rankings/t20i")
+        REPLY = "T20 Rankings: \n"
+    if (INTEXT):
+        for element in rankings:
+            REPLY += '{:>22}  {:>22}  {:>22}  {:>22}  {:>22}'.format(element[0], element[1], element[2], element[3], element[4]) + '\n'
+
 
 ICCurl = "https://www.icc-cricket.com/rankings/womens/team-rankings/odi"
 
 @RTMClient.run_on(event='message')
 def say_hello(**payload):
+    global INTEXT
+    global REPLY
     data = payload['data']
     web_client = payload['web_client']
     rtm_client = payload['rtm_client']
     channel_id = data['channel']
-    reply = ""
-    inText = False
-    if 'test ranking' in data['text']:
-        inText = True
-        test_rankings = cricketRankings("https://www.icc-cricket.com/rankings/mens/team-rankings/test")
-        reply = "Test Rankings: \n"
-        for element in test_rankings:
-            reply += '{:>22}  {:>22}  {:>22}  {:>22}  {:>22}'.format(element[0], element[1], element[2], element[3], element[4]) + '\n'
-    elif 'odi ranking' in data['text']:
-        inText = True
-        odi_rankings = cricketRankings("https://www.icc-cricket.com/rankings/mens/team-rankings/odi")
-        reply = "ODI Rankings: \n"
-        for element in odi_rankings:
-            reply += '{:>22}  {:>22}  {:>22}  {:>22}  {:>22}'.format(element[0], element[1], element[2], element[3], element[4]) + '\n'
-
-    if inText == True:   
-        user = data['user']
+    handleMensCricket(data)
+    if INTEXT == True:
+        INTEXT = False
         try:
             response = web_client.chat_postMessage(
                 channel=channel_id,
-                text=reply,
+                text=REPLY,
             )
         except SlackApiError as e:
             # You will get a SlackApiError if "ok" is False
