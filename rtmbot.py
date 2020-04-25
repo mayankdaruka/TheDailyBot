@@ -1,7 +1,6 @@
 import os
 from slack import RTMClient
 from slack.errors import SlackApiError
-from bs4 import BeautifulSoup
 
 base_url = "https://www.icc-cricket.com/rankings"
 
