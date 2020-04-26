@@ -23,8 +23,8 @@ def handleMensCricket(data):
         rankings = cricketRankings("https://www.icc-cricket.com/rankings/mens/team-rankings/t20i")
         REPLY = "T20 Rankings: \n"
     if (INTEXT):
-        for element in rankings:
-            REPLY += '{:>22}  {:>22}  {:>22}  {:>22}  {:>22}'.format(element[0], element[1], element[2], element[3], element[4]) + '\n'
+        for element in rankings[:25]:
+            REPLY += '{:<22}{:<22}{:<22}{:<22}{:<22}'.format(element[0], element[1], element[2], element[3], element[4]) + '\n'
 
 
 ICCurl = "https://www.icc-cricket.com/rankings/womens/team-rankings/odi"
