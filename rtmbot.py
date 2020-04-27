@@ -26,6 +26,11 @@ def handleMensCricket(data):
         for element in rankings[:25]:
             REPLY += '{:<22}{:<22}{:<22}{:<22}{:<22}'.format(element[0], element[1], element[2], element[3], element[4]) + '\n'
 
+def handleNews(data):
+    global INTEXT
+    global REPLY
+    pass
+
 
 ICCurl = "https://www.icc-cricket.com/rankings/womens/team-rankings/odi"
 
