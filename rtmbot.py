@@ -32,8 +32,6 @@ def handleNews(data):
     pass
 
 
-ICCurl = "https://www.icc-cricket.com/rankings/womens/team-rankings/odi"
-
 @RTMClient.run_on(event='message')
 def say_hello(**payload):
     global INTEXT
